@@ -38,6 +38,28 @@ int main(int argc, char **argv)
 	gettimeofday(&start, NULL);
 
 	/* TODO: Hier muss die Aufgabe geloest werden */
+	int i;
+	int j;
+	double distance = 1; //No matter what distance will be too big until it shrinks enough
+	while(distance > sqrt(0.0000001 * MATRIX_SIZE))
+	{
+		for(i = 0; i < MATRIX_SIZE; i++)
+		{
+			for(j = 0; j < MATRIX_SIZE; j++)
+			{
+				if(j != i)
+				{
+					X[i] = X[i] - A[i][j]*X_old[i];
+				}
+			}
+			X[i] = X[i]/A[i][i];
+		}
+		distance = sqrt(X[1]*X[1] + X_old[1]*X_old[1]);
+		for(i = 0; i < MATRIX_SIZE; i++)
+		{
+			X_old[i] = X[i];
+		}
+	}
 
 	gettimeofday(&end, NULL);
 
